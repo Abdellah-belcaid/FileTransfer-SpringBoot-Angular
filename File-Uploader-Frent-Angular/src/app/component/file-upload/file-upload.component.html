@@ -1,0 +1,41 @@
+<div class="container mt-3 ">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">File download/upload</h5>
+            <h6 class="card-subtitle mb-2 text-body-secondary">select filed from your computer</h6>
+            <div class="row">
+                <form enctype="multipart/form-data" action="">
+                    <div class="mb-3">
+                        <label for="formFileSm" class="form-label">file input</label>
+                        <input class="form-control form-control-sm" name="files" type="file" multiple
+                            (change)="onUploadFiles($event)" />
+                    </div>
+                </form>
+            </div>
+            <div class="row">
+                <div *ngIf="fileStatus.status==='progress'">
+                    <div class="progress">
+                        <div [style.width.%]="fileStatus.percent" class="progress-bar" role="progressbar"
+                            aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                            {{fileStatus.requestType}} {{fileStatus.percent}} %
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div *ngIf="fileNames.length > 0">
+                    <hr>
+                    <h3>Proccessed Files</h3>
+                    <div *ngFor="let filename of fileNames" class="list-group">
+                        <a (click)="onDownloadFile(filename)" class="list-group-item list-group-item-success"
+                            style="cursor: pointer;">
+                            {{filename}}
+                            <a class="alert-success text-right">Download</a>
+                        </a>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
